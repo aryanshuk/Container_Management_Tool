@@ -5,7 +5,7 @@ function createContainer() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
-            document.getElementById("body").innerHTML = http.responseText;
+            document.getElementById("mainPanel").innerHTML = http.responseText;
         }
     }
 

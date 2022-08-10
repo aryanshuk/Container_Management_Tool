@@ -16,7 +16,6 @@ app.use("/containers/create", express.static(path.join(__dirname, 'containers/cr
 app.use("/containers/list", express.static(path.join(__dirname, 'containers/list')));
 
 app.get("/", (req, res) => {
-    // serverip = req.ip;
     res.sendFile(__dirname + '/main/index.html');
 })
 app.get("/containers/create", (req, res) => {
@@ -59,9 +58,13 @@ app.get("/containers/create/launch", (req, res) => {
     command = "docker run -dit --name " + cname + " " + cimage;
     exec(command, (err, stdout, stderr) => {
         console.log(stdout);
+        res.write('<html><body bgcolor="darkgoldenrod">');
+        res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
         res.write("<h1>!! Container Launched !! </h1><br /><br /><hr />");
         res.write("<h3> Container Name : " + cname + "</h3>");
-        res.write("<h3> Container ID : " + stdout + "</h3>");
+        res.write("<h3> Container ID : " + stdout + "</h3><br /> <br />");
+        res.write('<a href="http://192.168.43.134/" style="display: block;width: 100px;height: 40px;font-size: 25px; text-decoration: none; background: white;text-align: center;padding-top: 10px; border-radius: 10px">Go Back</a>')
+        res.write('</div></body></html>');
         res.send();
     });
 });
