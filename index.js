@@ -9,14 +9,13 @@ app.listen(80, () => {
     console.log("Server Started ......")
 });
 
-
-app.use("/main", express.static(path.join(__dirname, 'main')));
+app.use("/containers/main", express.static(path.join(__dirname, 'containers/main')));
 app.use("/login", express.static(path.join(__dirname, 'login')));
 app.use("/containers/create", express.static(path.join(__dirname, 'containers/create')));
 app.use("/containers/list", express.static(path.join(__dirname, 'containers/list')));
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + '/main/index.html');
+    res.sendFile(__dirname + '/containers/main/index.html');
 })
 app.get("/containers/create", (req, res) => {
     res.sendFile(__dirname + "/containers/create/index.html");
@@ -29,7 +28,7 @@ app.get("/containers/list", (req, response) => {
         '<html><head><link rel="stylesheet" href="/containers/list/style.css"><title>Containers List</title></head>'
     );
 
-    http.get('http://192.168.43.134:2375/containers/json?all="true"', (res) => {
+    http.get('http://192.168.110.162:2375/containers/json?all="true"', (res) => {
         // console.log(res.statusCode);
         res.on("data", (data) => {
             parsedData = JSON.parse(data);
