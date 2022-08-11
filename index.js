@@ -5,7 +5,7 @@ var path = require("path")
 
 const app = express()
 
-serverIP = "192.168.99.162";
+serverIP = "192.168.16.227";
 
 app.listen(80, () => {
     console.log("Server Started ......")
@@ -381,4 +381,32 @@ app.get("/containers/rename/result", (req, res) => {
         }
         res.send('<html><head><link rel="stylesheet" href="/containers/log/result/style.css"></head><body><div id="infoPanel"> <h2>!! Renaming Container !! </h2><hr /> <br />' + output + '</div></body></html>');
     });
+});
+
+// Docker Networking
+app.use("/Networking/main", express.static(path.join(__dirname, 'Networking/main')));
+app.use("/Networking/create", express.static(path.join(__dirname, 'Networking/create')));
+app.use("/Networking/create/result", express.static(path.join(__dirname, 'Networking/create/result')));
+
+app.get("/Networking", (req, res) => {
+    res.sendFile(__dirname + "/Networking/main/index.html");
+})
+app.get("/Networking/create", (req, res) => {
+    res.sendFile(__dirname + "/Networking/create/index.html");
+})
+
+app.get("/Networking/create/result", (req, res) => {
+    subnet = req.query.subnet;
+    net_name = req.query.net_name;
+
+    command = "docker network create --driver=bridge --subnet="+subnet+" "+net_name;
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+        res.send('<html><head><link rel="stylesheet" href="/Networking/create/result/style.css"></head><body><div id="infoPanel"> <h2>"' + net_name + '" Network Created </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
 });
