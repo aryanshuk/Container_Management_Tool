@@ -1,4 +1,4 @@
-serverIP = "192.168.99.162";
+serverIP = "192.168.215.162";
 
 function listContainers(element) {
     const http = new XMLHttpRequest();

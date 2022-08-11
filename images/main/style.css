@@ -1,10 +1,10 @@
 body {
     background-color: darkgoldenrod;
-    overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-    width: 10px;
+    display: none;
 }
+/*
 ::-webkit-scrollbar-track {
     background: rgb(45, 43, 43);
 }
@@ -14,7 +14,7 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
+} */
 
 #head {
     font-size: xx-large;
@@ -68,7 +68,6 @@ body {
     transition-duration: 100ms;
     transition-property: all;
     transition-timing-function: ease-in-out;
-    cursor: pointer;
 }
 
 .leftPanelItem:hover {
