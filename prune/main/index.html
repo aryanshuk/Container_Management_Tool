@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<title>Unused Resource Manager</title>
+	<link rel="stylesheet" type="text/css" href="prune/main/style.css">
+	<script src="prune/main/script.js"></script>
+</head>
+
+<body>
+	<div id="head">Manage Unused Resources</div>
+	<div id="leftPanel">
+		<button class="leftPanelItem"  onclick="rmvAllVolumes()">Remove All Volumes</button>
+		<button class="leftPanelItem"  onclick="rmvsysResource()">Remove Unassociated Resource</button>
+		<button class="leftPanelItem"  onclick="rmvStoppedImg()">Remove Stopped and Unused Images</button>
+	<div id="mainPanel">
+		<button class="leftPanelItem"  onclick="rmvDanglingImg()">Remove Dangling Docker Images</button>
+	<div id="mainPanel">
+		<button class="leftPanelItem"  onclick="rmvUnusedCont()">Remove All Unused Containers</button>
+	<div id="mainPanel">
+		<button class="leftPanelItem"  onclick="rmvDockNtwrk()">Remove All Unused Containers</button>
+	<div id="mainPanel">
+		<h1>Unused Resources</h1>
+		<br />
+		<h3>Choose from the left panel to start performing some operations on the unused resources.</h3>
+	</div>
+</body>
+
+</html>
