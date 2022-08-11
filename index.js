@@ -68,3 +68,31 @@ app.get("/containers/create/launch", (req, res) => {
     });
 });
 
+// below -- by Sayantan Samanta 
+
+app.get("/containers/downloadImg", (req, res) => {
+    
+    cimage = req.query.cimage;
+
+    command = "docker pull" + " " + cimage;
+    exec(command, (err, stdout, stderr) => {
+        console.log(stdout);
+        res.write("<h1>!! Please Wait For Some Time Till The " + cimage + " " + "Image Gets Downloaded !!</h1><br /><br /><hr />");
+       
+        res.write("<h3>" + stdout + "</h3>");
+        res.send();
+    });
+});
+app.get("/containers/historyofImg", (req, res) => {
+    
+    cimage = req.query.cimage;
+
+    command = "docker history " + " " + cimage;
+    exec(command, (err, stdout, stderr) => {
+        console.log(stdout);
+        res.write("<h1>!! History of Image </h1><br /><br /><hr />");
+        
+        res.write("<h3>" + stdout + "</h3>");
+        res.send();
+    });
+});
