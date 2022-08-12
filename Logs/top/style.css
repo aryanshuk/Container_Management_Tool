@@ -1,19 +1,48 @@
-form {
-    color: white;
+#containerUserInput {
+    height: 40%;
+    position: relative;
+    top: 15%;
+    border: 3px solid black;
+    border-radius: 15px;
+    background: darkgoldenrod;
+    font-size: 24px;
+    font-weight: 900;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+    padding-top: 75px;
+    padding-bottom: 75px;
     text-align: center;
-    font-size: 25px;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", "Geneva", Verdana, sans-serif;
+    text-decoration: none;
 }
 
 input {
-    background-color: white;
-    border: 4px solid black;
-    border-radius: 10px;
-    height: 60px;
-    width: 400px;
-    font-weight: 800;
     font-size: 25px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
 }
-input:hover {
-    background-color: red;
+
+input:focus {
+    border: 5px solid black;
+    font-style: italic;
+}
+
+#submit {
+    background-color: black;
+    color: darkgoldenrod;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+    padding: 10px;
+    font-weight: 600;
+    margin-top: 50px;
+    font-size: 25px;
+    margin-top: 40px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    height: 60px;
+}
+
+#submit:hover {
+    font-size: 25px;
+    height: 70px;
 }

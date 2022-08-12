@@ -14,15 +14,13 @@
 <body>
 	<div id="head">Manage Unused Resources</div>
 	<div id="leftPanel">
-		<button class="leftPanelItem"  onclick="rmvAllVolumes()">Remove All Volumes</button>
-		<button class="leftPanelItem"  onclick="rmvsysResource()">Remove Unassociated Resource</button>
-		<button class="leftPanelItem"  onclick="rmvStoppedImg()">Remove Stopped and Unused Images</button>
-	<div id="mainPanel">
-		<button class="leftPanelItem"  onclick="rmvDanglingImg()">Remove Dangling Docker Images</button>
-	<div id="mainPanel">
-		<button class="leftPanelItem"  onclick="rmvUnusedCont()">Remove All Unused Containers</button>
-	<div id="mainPanel">
-		<button class="leftPanelItem"  onclick="rmvDockNtwrk()">Remove All Unused Containers</button>
+		<button class="leftPanelItem" onclick="removeAllVolumes()">Remove All Volumes</button>
+		<button class="leftPanelItem" onclick="removeSystemResource()">Remove Unassociated Resource</button>
+		<button class="leftPanelItem" onclick="removeStoppedImages()">Remove Stopped and Unused Images</button>
+		<button class="leftPanelItem" onclick="removeDanglingImages()">Remove Dangling Docker Images</button>
+		<button class="leftPanelItem" onclick="removeUnusedContainers()">Remove All Unused Containers</button>
+		<button class="leftPanelItem" onclick="removeUnusedNetworks()">Remove All Unused Networks</button>
+	</div>
 	<div id="mainPanel">
 		<h1>Unused Resources</h1>
 		<br />

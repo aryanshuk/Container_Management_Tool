@@ -1,7 +1,8 @@
-serverIP = "192.168.0.117";
+// serverIP = "containertool.ddns.net";
+serverIP = "192.168.19.162";
 
 //remove all the volumes part
-function rmvAllVolumes() {
+function removeAllVolumes() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -9,13 +10,13 @@ function rmvAllVolumes() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvVol", true);
+    http.open("GET", "http://" + serverIP + "/prune/allVolumes", true);
     http.send();
 }
 
 //remove unassociated resource part
 
-function rmvSysResource() {
+function removeSystemResource() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -23,14 +24,14 @@ function rmvSysResource() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvSysResource", true);
+    http.open("GET", "http://" + serverIP + "/prune/sysResources", true);
     http.send();
 }
 
 
 // remove stopped and unused images 
 
-function rmvStoppedImg() {
+function removeStoppedImages() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -38,14 +39,14 @@ function rmvStoppedImg() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvStoppedImg", true);
+    http.open("GET", "http://" + serverIP + "/prune/stoppedImages", true);
     http.send();
 }
 
 
 // remove dangling docker images 
 
-function rmvDanglingImg() {
+function removeDanglingImages() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -53,13 +54,13 @@ function rmvDanglingImg() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvDanglingImg", true);
+    http.open("GET", "http://" + serverIP + "/prune/danglingImages", true);
     http.send();
 }
 
 
 // remove all unused containers
-function rmvUnusedCont() {
+function removeUnusedContainers() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -67,13 +68,13 @@ function rmvUnusedCont() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvUnusedCont", true);
+    http.open("GET", "http://" + serverIP + "/prune/unusedContainers", true);
     http.send();
 }
 
 // remove unused docker networks
 
-function rmvDockNtwrk() {
+function removeUnusedNetworks() {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -81,6 +82,6 @@ function rmvDockNtwrk() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/prune/rmvDockNtwrk", true);
+    http.open("GET", "http://" + serverIP + "/prune/unusedNetworks", true);
     http.send();
 }

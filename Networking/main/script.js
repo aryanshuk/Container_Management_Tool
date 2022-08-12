@@ -1,4 +1,5 @@
-serverIP = "192.168.16.227";
+// serverIP = "containertool.ddns.net";
+serverIP = "192.168.19.162";
 
 function createNetwork() {
     const http = new XMLHttpRequest();
@@ -9,7 +10,7 @@ function createNetwork() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/Networking/create" , true);
+    http.open("GET", "http://" + serverIP + "/Networking/create", true);
     http.send();
 }
 
@@ -21,7 +22,7 @@ function listNetwork() {
             document.getElementById("mainPanel").innerHTML = http.responseText;
         }
     }
-    http.open("GET", "http://" + serverIP + "/Networking/list" , true);
+    http.open("GET", "http://" + serverIP + "/Networking/list", true);
     http.send();
 }
 
@@ -33,6 +34,6 @@ function inspectBridge() {
             document.getElementById("mainPanel").innerHTML = http.responseText;
         }
     }
-    http.open("GET", "http://" + serverIP + "/Networking/inspect" , true);
+    http.open("GET", "http://" + serverIP + "/Networking/inspect", true);
     http.send();
 }

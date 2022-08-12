@@ -15,5 +15,5 @@ input {
     font-size: 25px;
 }
 input:hover {
-    background-color: skyblue;
+    background-color: red;
 }

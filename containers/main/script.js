@@ -1,5 +1,5 @@
-serverIP = "containertool.ddns.net";
-
+// serverIP = "containertool.ddns.net";
+serverIP = "192.168.19.162";
 
 function listContainers(element) {
     const http = new XMLHttpRequest();

@@ -1,4 +1,5 @@
-serverIP = "192.168.16.227";
+// serverIP = "containertool.ddns.net";
+serverIP = "192.168.19.162";
 
 function createVolume() {
     const http = new XMLHttpRequest();
@@ -9,7 +10,7 @@ function createVolume() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/volumes/create" , true);
+    http.open("GET", "http://" + serverIP + "/volumes/create", true);
     http.send();
 }
 
@@ -22,7 +23,7 @@ function inspectVolume() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/volumes/inspect" , true);
+    http.open("GET", "http://" + serverIP + "/volumes/inspect", true);
     http.send();
 }
 
@@ -35,6 +36,6 @@ function removeVolume() {
         }
     }
 
-    http.open("GET", "http://" + serverIP + "/volumes/remove" , true);
+    http.open("GET", "http://" + serverIP + "/volumes/remove", true);
     http.send();
 }

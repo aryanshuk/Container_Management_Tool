@@ -1,9 +1,11 @@
 body {
     background-color: darkgoldenrod;
+    text-align: center;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    display: none;
 }
 
 header {
@@ -38,12 +40,12 @@ header {
 }
 
 #links {
-    height: 25%;
-    width: 90%;
+    height: 45%;
+    width: 92%;
     padding: 20px;
     padding-bottom: 50px;
     position: absolute;
-    left: 5%;
+    left: 3%;
     top: 15%;
     background-color: rgb(45, 43, 43);
     border-radius: 10px;
@@ -65,28 +67,28 @@ a {
     font-weight: 600;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
     box-shadow: 10px;
-    position: -webkit-sticky;
-    margin: 10px;
+    margin: 20px;
     text-decoration: none;
     cursor: pointer;
+    z-index: 2;
 }
 
 #about {
-    height: 25%;
-    width: 90%;
+    height: 15%;
+    width: 98%;
     padding: 20px;
     padding-bottom: 50px;
     position: absolute;
-    left: 5%;
-    top: 60%;
-    background-color: rgb(45, 43, 43);
-    border-radius: 10px;
+    left: 0px;
+    bottom: 0px;
+    background-color: black;
     text-align: center;
     margin: 0px;
     font-weight: 600;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
     color: white;
-    font-size: 24px;
+    font-size: 22px;
+    overflow-x: hidden;
 }
 h2 {
     margin: 0px;
