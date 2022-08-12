@@ -388,6 +388,9 @@ app.use("/Networking/main", express.static(path.join(__dirname, 'Networking/main
 app.use("/Networking/create", express.static(path.join(__dirname, 'Networking/create')));
 app.use("/Networking/create/result", express.static(path.join(__dirname, 'Networking/create/result')));
 
+
+
+
 app.get("/Networking", (req, res) => {
     res.sendFile(__dirname + "/Networking/main/index.html");
 })
@@ -407,6 +410,44 @@ app.get("/Networking/create/result", (req, res) => {
             output = stdout;
         }
         res.send('<html><head><link rel="stylesheet" href="/Networking/create/result/style.css"></head><body><div id="infoPanel"> <h2>"' + net_name + '" Network Created </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+});
+
+app.use("/Networking/list", express.static(path.join(__dirname, 'Networking/list')));
+app.use("/Networking/list/result", express.static(path.join(__dirname, 'Networking/list/result')));
+
+
+app.get("/Networking/list", (req, res) => {
+
+    command = "docker network ls";
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+
+        res.send('<html><head><link rel="stylesheet" href="/Networking/list/style.css"></head><body><div id="infoPanel"> <h2> Docker Networks List </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+});
+
+app.use("/Networking/inspect", express.static(path.join(__dirname, 'Networking/inspect')));
+app.use("/Networking/inspect/result", express.static(path.join(__dirname, 'Networking/inspect/result')));
+
+
+app.get("/Networking/inspect", (req, res) => {
+
+    command = "docker network inspect bridge";
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+
+        res.send('<html><head><link rel="stylesheet" href="/Networking/inspect/style.css"></head><body><div id="infoPanel"> <h2> Docker Inspect</h2><hr /> <pre>' + output + '</pre></div></body></html>');
     });
 
 });
