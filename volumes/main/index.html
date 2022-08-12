@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<title>Container Manager</title>
+	<link rel="stylesheet" type="text/css" href="volumes/main/style.css">
+	<script src="volumes/main/script.js"></script>
+</head>
+
+<body>
+	<div id="head">Manage Docker Volumes</div>
+	<div id="leftPanel">
+		<button class="leftPanelItem" id="listAllCon" onclick="createVolume()">Create Volume</button>
+		<button class="leftPanelItem" id="inpect_volume" onclick="inspectVolume()">Inspect Volume</button>
+		<button class="leftPanelItem" id="inpect_volume" onclick="removeVolume()">Remove Volume</button>
+	</div>
+	<div id="mainPanel">
+		<h1>Docker Volumes</h1>
+		<br />
+		<h3>Choose from the left panel to start performing some operations on the Volumes.</h3>
+	</div>
+</body>
+
+</html>

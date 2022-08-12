@@ -451,3 +451,70 @@ app.get("/Networking/inspect", (req, res) => {
     });
 
 });
+
+// Docker Volumes
+
+app.use("/volumes/main", express.static(path.join(__dirname, 'volumes/main')));
+app.use("/volumes/create", express.static(path.join(__dirname, 'volumes/create')));
+app.use("/volumes/create/result", express.static(path.join(__dirname, 'volumes/create/result')));
+
+
+
+
+app.get("/volumes", (req, res) => {
+    res.sendFile(__dirname + "/volumes/main/index.html");
+})
+app.get("/volumes/create", (req, res) => {
+    res.sendFile(__dirname + "/volumes/create/index.html");
+})
+
+app.get("/volumes/create/result", (req, res) => {
+    v_name = req.query.v_name;
+
+    command = "docker volume create "+v_name
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+        res.send('<html><head><link rel="stylesheet" href="/volumes/create/result/style.css"></head><body><div id="infoPanel"> <h2>"' + v_name + '" Volume Created </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+});
+
+app.use("/volumes/inspect", express.static(path.join(__dirname, 'volumes/inspect')));
+app.use("/volumes/inspect/result", express.static(path.join(__dirname, 'volumes/inspect/result')));
+
+app.get("/volumes/inspect/result", (req, res) => {
+    v_name = req.query.v_name;
+
+    command = "docker volume inspect "+v_name
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+        res.send('<html><head><link rel="stylesheet" href="/volumes/inspect/result/style.css"></head><body><div id="infoPanel"> <h2>"' + v_name + '" Volume info </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+});
+
+app.use("/volumes/remove", express.static(path.join(__dirname, 'volumes/remove')));
+app.use("/volumes/remove/result", express.static(path.join(__dirname, 'volumes/remove/result')));
+
+app.get("/volumes/remove/result", (req, res) => {
+    v_name = req.query.v_name;
+
+    command = "docker volume rm "+v_name
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+        } else {
+            output = stdout;
+        }
+        res.send('<html><head><link rel="stylesheet" href="/volumes/inspect/result/style.css"></head><body><div id="infoPanel"> <h2>"' + v_name + '" Volume deleted </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+});
