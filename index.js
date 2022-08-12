@@ -5,7 +5,8 @@ var path = require("path")
 
 const app = express()
 
-serverIP = "192.168.16.227";
+
+serverIP = "192.168.254.162";
 
 app.listen(80, () => {
     console.log("Server Started ......")
@@ -383,6 +384,7 @@ app.get("/containers/rename/result", (req, res) => {
     });
 });
 
+
 // Docker Networking
 app.use("/Networking/main", express.static(path.join(__dirname, 'Networking/main')));
 app.use("/Networking/create", express.static(path.join(__dirname, 'Networking/create')));
@@ -515,6 +517,286 @@ app.get("/volumes/remove/result", (req, res) => {
             output = stdout;
         }
         res.send('<html><head><link rel="stylesheet" href="/volumes/inspect/result/style.css"></head><body><div id="infoPanel"> <h2>"' + v_name + '" Volume deleted </h2><hr /> <pre>' + output + '</pre></div></body></html>');
+    });
+
+// ################ Addition by Ddhruv ################
+
+// ############## Codes for Services STARTS #############
+
+// Code for Services Main files
+app.use("/Services/main", express.static(path.join(__dirname, 'Services/main')));
+app.get("/Services", (req, res) => {
+    res.sendFile(__dirname + '/Services/main/index.html');
+})
+
+// Code for Start Option
+app.use("/Services/start", express.static(path.join(__dirname, 'Services/start')));
+app.get("/Services/start", (req, res) => {
+    res.sendFile(__dirname + "/Services/start/index.html");
+})
+
+app.get("/Services/start/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl start docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Starting Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Started Successfully</h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
+// Code for Enable Option
+app.use("/Services/enable", express.static(path.join(__dirname, 'Services/enable')));
+app.get("/Services/enable", (req, res) => {
+    res.sendFile(__dirname + "/Services/start/index.html");
+})
+
+app.get("/Services/enable/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl enable docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Enabling Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Enabled Successfully</h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for Restart Option
+app.use("/Services/restart", express.static(path.join(__dirname, 'Services/restart')));
+app.get("/Services/restart ", (req, res) => {
+    res.sendFile(__dirname + "/Services/start/index.html");
+})
+
+app.get("/Services/restart/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl restart docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Restarting Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Restarted Successfully</h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
+// Code for Stop Option
+app.use("/Services/stop", express.static(path.join(__dirname, 'Services/stop')));
+app.get("/Services/stop ", (req, res) => {
+    res.sendFile(__dirname + "/Services/stop/index.html");
+})
+
+app.get("/Services/stop/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl stop docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Stoppinging Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Stopped Successfully</h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
+// Code for Status Option
+app.use("/Services/status", express.static(path.join(__dirname, 'Services/status')));
+app.get("/Services/status ", (req, res) => {
+    res.sendFile(__dirname + "/Services/status/index.html");
+})
+
+app.get("/Services/status/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl status docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto" >');
+    res.write("<h1>!!Getting the Status of Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output :<pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
+// ############## Codes for Services ENDS #############
+
+// ############## Codes for Logs STARTS #############
+
+// Code for Logs Main files
+app.use("/Logs/main", express.static(path.join(__dirname, 'Logs/main')));
+app.get("/Logs", (req, res) => {
+    res.sendFile(__dirname + '/Logs/main/index.html');
+})
+
+// Code for Version Option
+app.use("/Logs/version/", express.static(path.join(__dirname, 'Logs/version/')));
+app.get("/Logs/version/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/version/index.html");
+})
+
+app.get("/Logs/version/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo docker --version";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Docker Version Details !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : Current Version:  <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for Events Option
+app.use("/Logs/events/", express.static(path.join(__dirname, 'Logs/events/')));
+app.get("/Logs/events/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/events/index.html");
+})
+
+app.get("/Logs/events/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo docker events";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Docker Events !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : Events:  <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for Top Option
+app.use("/Logs/top/", express.static(path.join(__dirname, 'Logs/top/')));
+app.get("/Logs/top/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/top/index.html");
+})
+
+app.get("/Logs/top/launch", (req, res) => {
+    cname = req.query.cname;
+    command = "sudo docker top" + " " + cname;
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Info. about" + " " + cname + " container !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output: " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output: <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for stats Option
+app.use("/Logs/stats/", express.static(path.join(__dirname, 'Logs/stats/')));
+app.get("/Logs/stats/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/stats/index.html");
+})
+
+app.get("/Logs/stats/launch", (req, res) => {
+    cname = req.query.cname;
+    command = "sudo docker stats" + " " + cname;
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Stats. about" + " " + cname + " container !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output: " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output: <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for Port Option
+app.use("/Logs/port/", express.static(path.join(__dirname, 'Logs/port/')));
+app.get("/Logs/port/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/port/index.html");
+})
+
+app.get("/Logs/port/launch", (req, res) => {
+    cname = req.query.cname;
+    command = "sudo docker port" + " " + cname;
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Info. about Port on " + " " + cname + " container !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output: " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output: <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
     });
 
 });
