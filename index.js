@@ -638,3 +638,28 @@ app.get("/Logs/stats/launch", (req, res) => {
         res.send();
     });
 });
+
+// Code for Port Option
+app.use("/Logs/port/", express.static(path.join(__dirname, 'Logs/port/')));
+app.get("/Logs/port/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/port/index.html");
+})
+
+app.get("/Logs/port/launch", (req, res) => {
+    cname = req.query.cname;
+    command = "sudo docker port" + " " + cname;
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Info. about Port on " + " " + cname + " container !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output: " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output: <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
