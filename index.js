@@ -546,7 +546,7 @@ app.get("/Logs/version/", (req, res) => {
 app.get("/Logs/version/launch", (req, res) => {
     //cname = req.query.cname;
 
-    command = "sudo systemctl docker --version";
+    command = "sudo docker --version";
     res.write('<html><body bgcolor="darkgoldenrod">');
     res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
     res.write("<h1>!! Getting Docker Version Details !!</h1><br /><br /><hr />");
@@ -557,6 +557,32 @@ app.get("/Logs/version/launch", (req, res) => {
         } else {
             output = stdout;
             res.write("<h3> Output : Current Version:  <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+// Code for Events Option
+app.use("/Logs/events/", express.static(path.join(__dirname, 'Logs/events/')));
+app.get("/Logs/events/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/events/index.html");
+})
+
+app.get("/Logs/events/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo docker events";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Docker Events !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : Events:  <pre>" + output + "</pre> </h3><br /> <br />");
         }
         res.write('</div></body></html>');
         res.send();
