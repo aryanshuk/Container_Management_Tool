@@ -15,8 +15,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-// serverIP = "containertool.ddns.net";
-serverIP = "192.168.19.162";
+serverIP = "containertool.ddns.net";
 
 app.listen(80, () => {
     console.log("Server Started ......")
