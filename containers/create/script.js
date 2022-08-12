@@ -1,3 +1,4 @@
+serverIP = "192.168.16.227"
 function createContainer() {
     let cname = document.getElementById("cname").value;
     let cimage = document.getElementById("cimage").value;
@@ -9,6 +10,6 @@ function createContainer() {
         }
     }
 
-    http.open("GET", "http://192.168.110.162/containers/create/status?cname=" + cname + "&cimage=" + cimage, true);
+    http.open("GET", "http://"+ serverIP +"/containers/create/status?cname=" + cname + "&cimage=" + cimage, true);
     http.send();
 }
