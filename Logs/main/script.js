@@ -32,3 +32,14 @@ function topDocker() {
     http.open("GET", "http://" + serverIP + "/Logs/top/", true)
     http.send();
 }
+
+function getDockerStats() {
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            document.getElementById("mainPanel").innerHTML = http.responseText;
+        }
+    }
+    http.open("GET", "http://" + serverIP + "/Logs/stats/", true)
+    http.send();
+}
