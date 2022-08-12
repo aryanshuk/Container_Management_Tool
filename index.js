@@ -5,7 +5,7 @@ var path = require("path")
 
 const app = express()
 
-serverIP = "192.168.99.162";
+serverIP = "192.168.254.162";
 
 app.listen(80, () => {
     console.log("Server Started ......")
