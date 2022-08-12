@@ -2,17 +2,20 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="containers/create/style.css">
-    <script src="containers/create/script.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <div id="heading">Create A Container</div>
+    <div id="heading"> Start Docker Services </div>
+
     <div id="containerUserInput">
-        <form action="/containers/create/launch">
-            Container Name : <input name="cname" /><br />
-            Container Image Name : <input name="cimage" /><br />
-            <input type="submit">
+        <form action="/Services/start/launch">
+            Do you want to start Docker Services ? <br /><br />
+            <input type="submit" value="Start Docker">
         </form>
     </div>
 </body>

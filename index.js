@@ -382,3 +382,30 @@ app.get("/containers/rename/result", (req, res) => {
         res.send('<html><head><link rel="stylesheet" href="/containers/log/result/style.css"></head><body><div id="infoPanel"> <h2>!! Renaming Container !! </h2><hr /> <br />' + output + '</div></body></html>');
     });
 });
+
+// ################ Addition by Ddhruv ################
+
+app.use("/Services/start", express.static(path.join(__dirname, '/Services/start')));
+app.get("/Services/start", (req, res) => {
+    res.sendFile(__dirname + "/Services/start/index.html");
+})
+
+app.get("/Services/start/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl start docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Stopping  All Containers!! </h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Started </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
