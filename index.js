@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-serverIP = "containertool.ddns.net";
+// serverIP = "containertool.ddns.net";
+serverIP = "192.168.2.162";
 
 app.listen(80, () => {
     console.log("Server Started ......")
@@ -20,6 +21,9 @@ app.listen(80, () => {
 app.use("/homepage", express.static(path.join(__dirname, 'homepage')));
 app.use("/homepage/images", express.static(path.join(__dirname, 'homepage/images')));
 app.get("/home", (req, res) => {
+    res.sendFile(__dirname + "/homepage/index.html")
+})
+app.get("/", (req, res) => {
     res.sendFile(__dirname + "/homepage/index.html")
 })
 
@@ -48,7 +52,7 @@ app.get("/containers/list/all", (req, response) => {
         res.on("data", (data) => {
             parsedData = JSON.parse(data);
 
-            response.write('<body><div id="heading">List of All Containers</div><table><tr><th>Container ID</th><th>Container Name</th><th>Container Image</th><th>State</th><th>Status</th><th>Command</th></tr>');
+            response.write('<body><div id="heading">List of All Containers</div><table><tr><th>Container ID</th><th>Container Name</th><th>Container Image</th><th>State</th><th>Status</th><th>Port</th><th>Command</th></tr>');
             if (parsedData.length == 0) {
                 response.write("<tr><td colspan=6 >No containers available.</td></tr>");
             }
@@ -60,8 +64,13 @@ app.get("/containers/list/all", (req, response) => {
                     let cState = parsedData[i].State;
                     let cStatus = parsedData[i].Status;
                     let cCommand = parsedData[i].Command;
+                    let cPort = parsedData[i].Ports;
+                    let portString = "";
+                    for (let j = 0; j < cPort.length; j++) {
+                        portString = portString + cPort[j].IP + ":" + cPort[j].PublicPort + "->" + cPort[j].PrivatePort + "/" + cPort[j].Type + ",";
+                    }
 
-                    response.write("<tr><td>" + cId + "</td><td>" + cName + "</td><td>" + cImage + "</td><td>" + cState + "</td><td>" + cStatus + "</td><td>" + cCommand + "</td></tr>");
+                    response.write("<tr><td>" + cId + "</td><td>" + cName + "</td><td>" + cImage + "</td><td>" + cState + "</td><td>" + cStatus + "</td><td>" + portString + "</td><td>" + cCommand + "</td></tr>");
                 }
             }
 
@@ -81,7 +90,7 @@ app.get("/containers/list/running", (req, response) => {
         res.on("data", (data) => {
             parsedData = JSON.parse(data);
 
-            response.write('<body><div id="heading">List of Runnning Containers</div><table><tr><th>Container ID</th><th>Container Name</th><th>Container Image</th><th>State</th><th>Status</th><th>Command</th></tr>');
+            response.write('<body><div id="heading">List of Runnning Containers</div><table><tr><th>Container ID</th><th>Container Name</th><th>Container Image</th><th>State</th><th>Status</th><th>Port</th><th>Command</th></tr>');
             if (parsedData.length == 0) {
                 response.write("<tr><td colspan=6 >No running containers available.</td></tr>");
             }
@@ -93,10 +102,16 @@ app.get("/containers/list/running", (req, response) => {
                     let cState = parsedData[i].State;
                     let cStatus = parsedData[i].Status;
                     let cCommand = parsedData[i].Command;
+                    let cPort = parsedData[i].Ports;
+                    let portString = "";
+                    for (let j = 0; j < cPort.length; j++) {
+                        portString = portString + cPort[j].IP + ":" + cPort[j].PublicPort + "->" + cPort[j].PrivatePort + "/" + cPort[j].Type + ",";
+                    }
 
-                    response.write("<tr><td>" + cId + "</td><td>" + cName + "</td><td>" + cImage + "</td><td>" + cState + "</td><td>" + cStatus + "</td><td>" + cCommand + "</td></tr>");
+                    response.write("<tr><td>" + cId + "</td><td>" + cName + "</td><td>" + cImage + "</td><td>" + cState + "</td><td>" + cStatus + "</td><td>" + portString + "</td><td>" + cCommand + "</td></tr>");
                 }
             }
+
 
             response.write("</table></body></html>");
             response.send();
@@ -112,7 +127,7 @@ app.get("/containers/create/launch", (req, res) => {
     cname = req.query.cname;
     cimage = req.query.cimage;
 
-    command = "docker run -dit --name " + cname + " " + cimage;
+    command = "docker run -dit -P --name " + cname + " " + cimage;
     exec(command, (err, stdout, stderr) => {
         res.write('<html><body bgcolor="darkgoldenrod">');
         res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
