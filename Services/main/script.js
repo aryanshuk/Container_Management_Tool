@@ -32,3 +32,14 @@ function restartDockerServices() {
     http.open("GET", "http://" + serverIP + "/Services/restart/", true)
     http.send();
 }
+
+function stopDockerServices() {
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            document.getElementById("mainPanel").innerHTML = http.responseText;
+        }
+    }
+    http.open("GET", "http://" + serverIP + "/Services/stop/", true)
+    http.send();
+}

@@ -427,7 +427,7 @@ app.get("/Services/enable", (req, res) => {
 app.get("/Services/enable/launch", (req, res) => {
     //cname = req.query.cname;
 
-    command = "sudo systemctl start docker";
+    command = "sudo systemctl enable docker";
     res.write('<html><body bgcolor="darkgoldenrod">');
     res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
     res.write("<h1>!! Enabling Docker Services !!</h1><br /><br /><hr />");
@@ -453,7 +453,7 @@ app.get("/Services/restart ", (req, res) => {
 app.get("/Services/restart/launch", (req, res) => {
     //cname = req.query.cname;
 
-    command = "sudo systemctl start docker";
+    command = "sudo systemctl restart docker";
     res.write('<html><body bgcolor="darkgoldenrod">');
     res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
     res.write("<h1>!! Restarting Docker Services !!</h1><br /><br /><hr />");
@@ -469,4 +469,33 @@ app.get("/Services/restart/launch", (req, res) => {
         res.send();
     });
 });
+
+
+// Code for Stop Option
+app.use("/Services/stop", express.static(path.join(__dirname, 'Services/stop')));
+app.get("/Services/stop ", (req, res) => {
+    res.sendFile(__dirname + "/Services/stop/index.html");
+})
+
+app.get("/Services/stop/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl stop docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px" >');
+    res.write("<h1>!! Stoppinging Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : " + output + " Services Stopped Successfully</h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
 
