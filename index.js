@@ -498,4 +498,32 @@ app.get("/Services/stop/launch", (req, res) => {
 });
 
 
+// Code for Status Option
+app.use("/Services/status", express.static(path.join(__dirname, 'Services/status')));
+app.get("/Services/status ", (req, res) => {
+    res.sendFile(__dirname + "/Services/status/index.html");
+})
+
+app.get("/Services/status/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl status docker";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto" >');
+    res.write("<h1>!!Getting the Status of Docker Services !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output :<pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
+
+
+
 
