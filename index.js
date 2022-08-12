@@ -588,3 +588,30 @@ app.get("/Logs/events/launch", (req, res) => {
         res.send();
     });
 });
+
+
+
+// Code for Top Option
+app.use("/Logs/top/", express.static(path.join(__dirname, 'Logs/top/')));
+app.get("/Logs/top/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/top/index.html");
+})
+
+app.get("/Logs/top/launch", (req, res) => {
+    cname = req.query.cname;
+    command = "sudo docker top" + " " + cname;
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Info. about" + " " + cname + " container !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => { 
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output: " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output: <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
