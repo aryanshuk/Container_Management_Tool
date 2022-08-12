@@ -385,6 +385,8 @@ app.get("/containers/rename/result", (req, res) => {
 
 // ################ Addition by Ddhruv ################
 
+// ############## Codes for Services STARTS #############
+
 // Code for Services Main files
 app.use("/Services/main", express.static(path.join(__dirname, 'Services/main')));
 app.get("/Services", (req, res) => {
@@ -525,5 +527,38 @@ app.get("/Services/status/launch", (req, res) => {
 });
 
 
+// ############## Codes for Services ENDS #############
 
+// ############## Codes for Logs STARTS #############
 
+// Code for Logs Main files
+app.use("/Logs/main", express.static(path.join(__dirname, 'Logs/main')));
+app.get("/Logs", (req, res) => {
+    res.sendFile(__dirname + '/Logs/main/index.html');
+})
+
+// Code for Version Option
+app.use("/Logs/version/", express.static(path.join(__dirname, 'Logs/version/')));
+app.get("/Logs/version/", (req, res) => {
+    res.sendFile(__dirname + "/Logs/version/index.html");
+})
+
+app.get("/Logs/version/launch", (req, res) => {
+    //cname = req.query.cname;
+
+    command = "sudo systemctl docker --version";
+    res.write('<html><body bgcolor="darkgoldenrod">');
+    res.write('<div style="position: absolute;left: 5%;top: 10%;background-color: rgb(45, 43, 43);border-radius: 10px;width: 80%; height: 70%; color: white; padding: 50px; overflow: auto;" >');
+    res.write("<h1>!! Getting Docker Version Details !!</h1><br /><br /><hr />");
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output = stderr;
+            res.write("<h3> Output : " + output + " </h3><br /> <br />");
+        } else {
+            output = stdout;
+            res.write("<h3> Output : Current Version:  <pre>" + output + "</pre> </h3><br /> <br />");
+        }
+        res.write('</div></body></html>');
+        res.send();
+    });
+});
