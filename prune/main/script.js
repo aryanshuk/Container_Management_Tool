@@ -1,4 +1,4 @@
-serverIP = "containertool.ddns.net";
+serverIP = "containertoolcms.ddns.net";
 
 //remove all the volumes part
 function removeAllVolumes() {

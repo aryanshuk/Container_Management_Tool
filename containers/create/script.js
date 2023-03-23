@@ -1,4 +1,4 @@
-serverIP = "192.168.16.227"
+serverIP = "containertoolcms.ddns.net";
 function createContainer() {
     let cname = document.getElementById("cname").value;
     let cimage = document.getElementById("cimage").value;

@@ -1,4 +1,4 @@
-serverIP = "containertool.ddns.net";
+serverIP = "containertoolcms.ddns.net";
 
 function getDockerVersion() {
     const http = new XMLHttpRequest();
